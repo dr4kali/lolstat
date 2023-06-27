@@ -12,6 +12,9 @@ $encodedSummonerName = urlencode($summonerName);
 $checkQuery = "SELECT name FROM summoners WHERE name = '$summonerName'";
 $result = mysqli_query($conn, $checkQuery);
 
+//Riot Game API
+$API = "RGAPI-73e3b84c-349e-40b3-bd22-dc009e2ef75d";
+
 if (mysqli_num_rows($result) > 0) {
     // Summoner name already exists in the database, redirect to results page
     $url = "http://localhost/Project/MWD/node_modules/bootstrap/dist/results.php?summonerName=". urldecode($summonerName);
@@ -31,7 +34,7 @@ $headers = [
     "Accept-Language: en-US,en;q=0.5",
     "Accept-Charset: application/x-www-form-urlencoded; charset=UTF-8",
     "Origin: https://developer.riotgames.com",
-    "X-Riot-Token: RGAPI-48032aae-8457-4ece-8a7f-e02bf6d8218d"
+    "X-Riot-Token: $API"
 ];
 
 // Initialize cURL
@@ -88,7 +91,7 @@ if ($response !== false) {
         "Accept-Language: en-US,en;q=0.5",
         "Accept-Charset: application/x-www-form-urlencoded; charset=UTF-8",
         "Origin: https://developer.riotgames.com",
-        "X-Riot-Token: RGAPI-48032aae-8457-4ece-8a7f-e02bf6d8218d"
+        "X-Riot-Token: $API"
     ];
 
     //Set cURL options for the second API request
