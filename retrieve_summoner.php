@@ -9,11 +9,12 @@ $summonerName = $_POST['summoner_name'];
 $encodedSummonerName = urlencode($summonerName);
 
 // Check if summoner name already exists in the database
-$checkQuery = "SELECT name FROM summoners WHERE name = '$summonerName'";
+$normalizedName = strtolower($summonerName);
+$checkQuery = "SELECT name FROM summoners WHERE name = '$normalizedName'";
 $result = mysqli_query($conn, $checkQuery);
 
 //Riot Game API
-$API = "RGAPI-7da7d50d-bda5-4e4d-bfc2-e2c090c07546";
+$API = "RGAPI-66d08eef-9e4b-491b-9a1f-db910bca2c96";
 
 if (mysqli_num_rows($result) > 0) {
     // Summoner name already exists in the database, redirect to results page
@@ -56,7 +57,7 @@ if ($response !== false) {
     $profileIconId = $data['profileIconId'];
 
     // Generate the URL for the profile icon image
-    $profileIconUrl = "http://ddragon.leagueoflegends.com/cdn/13.12.1/img/profileicon/{$profileIconId}.png";
+    $profileIconUrl = "http://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/{$profileIconId}.png";
 
     // Get the summoner's name
     $summonerName = $data['name'];
@@ -69,7 +70,7 @@ if ($response !== false) {
 
     //Inserting responses to database
     $sql = "INSERT INTO summoners(name, level, profile) 
-    VALUES ('$summonerName','$summonerLevel','$profileIconUrl')";
+    VALUES ('$normalizedName','$summonerLevel','$profileIconUrl')";
 	  //die($sql);
     $result= mysqli_query($conn,$sql);
 
@@ -180,7 +181,7 @@ foreach ($data as $entry) {
     $championLevel = $entry['championLevel'];
     $championPoints = $entry['championPoints'];
 
-    $stmt->bind_param("siii",$summonerName, $championId, $championLevel, $championPoints);
+    $stmt->bind_param("siii",$normalizedName, $championId, $championLevel, $championPoints);
     $stmt->execute();
 }
 

@@ -1,9 +1,9 @@
-/* Add the following CSS to your stylers.css file or within a <style> tag in the HTML file */
-
+/* Default styles */
 body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #fff;
+  background-color: #02000a;
   margin: 0;
   padding: 20px;
   display: flex;
@@ -12,6 +12,9 @@ body {
 
 .container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -71,16 +74,39 @@ body {
 }
 
 /* Adjust the sizes and positions of the cards */
-
 .container {
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.sub-card {
-  flex: 1;
+/* Media queries */
+@media (max-width: 768px) {
+  .card img {
+    width: 150px;
+  }
+
+  .sub-card img {
+    width: 80px;
+  }
 }
 
-.sub-card:nth-child(2) {
-  flex: 2;
+@media (max-width: 480px) {
+  .card img {
+    width: 120px;
+  }
+
+  .sub-card img {
+    width: 60px;
+  }
+
+  .card,
+  .sub-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
 }

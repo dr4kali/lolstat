@@ -167,6 +167,7 @@
     
     try {
       $name = getChampionName($championId);
+      $name = str_replace(' ', '', $name);
     } catch (Exception $e) {
       echo 'Error: ' . $e->getMessage();
     }
@@ -216,6 +217,7 @@
     
     try {
       $name = getChampionName2($championId);
+      $name = str_replace(' ', '', $name);
     } catch (Exception $e) {
       echo 'Error: ' . $e->getMessage();
     }
@@ -265,6 +267,7 @@
     
     try {
       $name = getChampionName3($championId);
+      $name = str_replace(' ', '', $name);
     } catch (Exception $e) {
       echo 'Error: ' . $e->getMessage();
     }

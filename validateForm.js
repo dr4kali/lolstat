@@ -18,4 +18,17 @@ function getChampionName(championId) {
         throw new Error('An error occurred.');
       });
   }
+
+  function validateForm() {
+    var summonerName = document.getElementById('summoner_name').value;
+  
+    // Regular expression to check for special characters
+    var regex = /[!@#$%'"\\]/;
+  
+    // Check if the input contains special characters
+    if (regex.test(summonerName)) {
+      alert("Special characters are not allowed in the summoner name.");
+      return false; // Prevent form submission
+    }
+  }
   
