@@ -14,7 +14,7 @@ $checkQuery = "SELECT name FROM summoners WHERE name = '$normalizedName'";
 $result = mysqli_query($conn, $checkQuery);
 
 //Riot Game API
-$API = "RGAPI-a50da25e-d289-44b0-ba02-862a62c767e3";
+$API = "RGAPI-66d08eef-9e4b-491b-9a1f-db910bca2c96";
 
 if (mysqli_num_rows($result) > 0) {
     // Summoner name already exists in the database, redirect to results page

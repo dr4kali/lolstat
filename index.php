@@ -7,9 +7,9 @@
    <!-- <script src="script.js"></script> -->
 </head>
 <body>
-    <header>
-        <img src="logo.png" class="logo" alt="logo" width="300px"/>
-    </header>
+    <div id="header">
+        <img src="/mains/logo.png" alt="website logo" height="350px" width="550px">
+    </div>
     <div id="content">
         <form id="search-box" action="retrieve_summoner.php" method="post" onsubmit="return validateForm()">
             <input type="text" name="summoner_name" id="summoner_name" placeholder="Search Summoner">
