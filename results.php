@@ -110,6 +110,7 @@
         echo "Error: " . mysqli_error($conn);
     }
         ?>
+<div class="container">
   <div class="card">
     <?php
       // Fetch image URLs from the database
@@ -279,5 +280,6 @@
         echo "<p class='mb-0'>$minMasteryChampionLevel</p>";
         ?></h3>
   </div>
+</div>
 </body>
 </html>
