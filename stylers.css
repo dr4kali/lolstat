@@ -1,20 +1,18 @@
-/* Default styles */
 body {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
   font-family: Arial, sans-serif;
   background-color: #02000a;
   margin: 0;
   padding: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
+
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center; /* Center align the cards horizontally */
 }
 
 .card {
@@ -25,6 +23,7 @@ body {
   max-width: 400px;
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
 }
 
 .card img {
@@ -36,11 +35,13 @@ body {
 .card h2 {
   font-size: 24px;
   margin-bottom: 10px;
+  color: #ffffff  !important;
 }
 
 .card h3 {
   font-size: 18px;
   margin-bottom: 0;
+  color: #ffffff  !important;
 }
 
 .sub-card {
@@ -53,8 +54,24 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.max-card {
+  background-color: #292929;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  max-width: 45s0px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .sub-card img {
   width: 100px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.max-card img {
+  width: 120px;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -64,8 +81,18 @@ body {
   margin-bottom: 5px;
 }
 
+.max-card h2 {
+  font-size: 25;
+  margin-bottom: 5px;
+}
+
 .sub-card h3 {
   font-size: 16px;
+  margin-bottom: 0;
+}
+
+.max-card h3 {
+  font-size: 20px;
   margin-bottom: 0;
 }
 
@@ -73,7 +100,6 @@ body {
   margin-bottom: 0;
 }
 
-/* Adjust the sizes and positions of the cards */
 .container {
   justify-content: space-between;
   align-items: flex-start;
@@ -88,6 +114,10 @@ body {
   .sub-card img {
     width: 80px;
   }
+
+  .max-card img {
+    width: 90px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -97,6 +127,10 @@ body {
 
   .sub-card img {
     width: 60px;
+  }
+
+  .max-card img {
+    width: 70px;
   }
 
   .card,
@@ -109,4 +143,12 @@ body {
   .container {
     flex-direction: column;
   }
+}
+
+h2 {
+  color: aliceblue;
+}
+
+h3 {
+  color: aliceblue;
 }

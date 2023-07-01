@@ -6,6 +6,9 @@
   <link rel="stylesheet" type="text/css" href="stylers.css">
 </head>
 <body>
+<header>
+        <img src="logo.png" class="logo" alt="logo" width="300px"/>
+    </header><br/>
 <?php include 'dbconf.php';
           $summonerName = $_GET['summonerName'];
            $sql = "SELECT profile, name, level, total_mastery FROM summoners WHERE name='$summonerName'";
@@ -122,13 +125,13 @@
         // Display the name
         echo "$summonerName";
         ?></h2>
-    <h2>Level:                               
+    <h2>Experience:                               
       <?php
         // Display the name
         echo "$level";
         ?>
     </h2>
-    <h3>Total Mastery Level:<?php
+    <h3>Mastery Score:<?php
         // Display the total mastery
         echo "$total_mastery";
         ?>
@@ -185,7 +188,7 @@
         ?></h3>
   </div>
   
-  <div class="sub-card">
+  <div class="max-card">
   <?php 
     $championId = $maxMasteryChampionId;
 

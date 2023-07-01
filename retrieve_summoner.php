@@ -14,7 +14,7 @@ $checkQuery = "SELECT name FROM summoners WHERE name = '$normalizedName'";
 $result = mysqli_query($conn, $checkQuery);
 
 //Riot Game API
-$API = "RGAPI-66d08eef-9e4b-491b-9a1f-db910bca2c96";
+$API = "RGAPI-a50da25e-d289-44b0-ba02-862a62c767e3";
 
 if (mysqli_num_rows($result) > 0) {
     // Summoner name already exists in the database, redirect to results page
@@ -48,6 +48,18 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
 // Execute the cURL request
 $response = curl_exec($curl);
+
+// Get the response code
+$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+if ($httpCode == 404) {
+    // Display an alert message
+    echo "<script>alert('Summoner not found');</script>";
+
+    // Redirect back to the previous page
+    echo "<script>window.location = '{$_SERVER['HTTP_REFERER']}';</script>";
+    exit;
+}
 
 if ($response !== false) {
     // Decode the JSON response
