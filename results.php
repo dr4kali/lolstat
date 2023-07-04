@@ -11,10 +11,13 @@
     </header><br/>
 <?php include 'dbconf.php';
           $summonerName = $_GET['summonerName'];
-           $sql = "SELECT profile, name, level, total_mastery FROM summoners WHERE name='$summonerName'";
+          $summonerName = urldecode($summonerName);
+          $normalizedName = strtolower($summonerName);
+
+           $sql = "SELECT profile, name, level, total_mastery FROM summoners WHERE name='$normalizedName'";
            $result = $conn->query($sql);
            
-           $msql = "SELECT championLevel, championId, championPoints FROM mastery WHERE name='$summonerName'";
+           $msql = "SELECT championLevel, championId, championPoints FROM mastery WHERE name='$normalizedName'";
            $mresult = $conn->query($msql);
 
            // Check if there are any results
@@ -27,9 +30,9 @@
                    $total_mastery = $row["total_mastery"];
                }
               }
-              $query1 = "SELECT championId, championPoints, championLevel FROM mastery WHERE `Name` = '$summonerName'";
-              $query2 = "SELECT championPoints, championLevel FROM mastery WHERE `Name` = '$summonerName'";
-              $query3 = "SELECT championPoints, championLevel FROM mastery WHERE `Name` = '$summonerName'";
+              $query1 = "SELECT championId, championPoints, championLevel FROM mastery WHERE `Name` = '$normalizedName'";
+              $query2 = "SELECT championPoints, championLevel FROM mastery WHERE `Name` = '$normalizedName'";
+              $query3 = "SELECT championPoints, championLevel FROM mastery WHERE `Name` = '$normalizedName'";
 
               // Execute the queries
               $result1 = mysqli_query($conn, $query1);
