@@ -137,24 +137,12 @@ body {
   .sub-card {
     max-width: 100%;
   }
-
-.mb-0 {
-  margin-bottom: 0;
 }
 
-/* Adjust the sizes and positions of the cards */
-
-.container {
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.sub-card {
-  flex: 1;
-}
-
-.sub-card:nth-child(2) {
-  flex: 2;
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 480px) {
