@@ -14,16 +14,50 @@ $checkQuery = "SELECT name FROM summoners WHERE name = '$normalizedName'";
 $result = mysqli_query($conn, $checkQuery);
 
 //Riot Game API
-$API = "RGAPI-a50da25e-d289-44b0-ba02-862a62c767e3";
+$API = "RGAPI-5641276c-236c-40ec-9767-b2e3a67bc6b5";
 
 if (mysqli_num_rows($result) > 0) {
-    // Summoner name already exists in the database, redirect to results page
-    $url = "http://localhost/mains/results.php?summonerName=". urldecode($summonerName);
-    header("Location: $url");
-    exit();
+
+    // Format the API endpoint URL with the encoded summoner name
+    $url = "https://sg2.api.riotgames.com/lol/summoner/v4/summoners/by-name/{$encodedSummonerName}";
+
+
+    // Set the headers
+    $headers = [
+    "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
+    "Accept-Language: en-US,en;q=0.5",
+    "Accept-Charset: application/x-www-form-urlencoded; charset=UTF-8",
+    "Origin: https://developer.riotgames.com",
+    "X-Riot-Token: $API"
+    ];
+
+    // Initialize cURL
+    $curl = curl_init();
+
+    // Set cURL options
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+
+    if ($response !== false) {
+        // Decode the JSON response
+        $data = json_decode($response, true);
+
+        // Get the summoner's name
+        $sName = $data['name'];
+
+        curl_close($curl);
+
+        $cleanedName = str_replace('  ', ' ', $sName);
+        $url = "http://localhost/mains/results.php?summonerName=". urlencode($cleanedName);
+        header("Location: $url");
+        exit();
+    }
+
 }
-
-
 
 // Format the API endpoint URL with the encoded summoner name
 $url = "https://sg2.api.riotgames.com/lol/summoner/v4/summoners/by-name/{$encodedSummonerName}";
@@ -52,6 +86,7 @@ $response = curl_exec($curl);
 // Get the response code
 $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
+// Check if response code is 404
 if ($httpCode == 404) {
     // Display an alert message
     echo "<script>alert('Summoner not found');</script>";
@@ -69,10 +104,10 @@ if ($response !== false) {
     $profileIconId = $data['profileIconId'];
 
     // Generate the URL for the profile icon image
-    $profileIconUrl = "http://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/{$profileIconId}.png";
+    $profileIconUrl = "http://ddragon.leagueoflegends.com/cdn/13.12.1/img/profileicon/{$profileIconId}.png";
 
     // Get the summoner's name
-    $summonerName = $data['name'];
+    $sName = $data['name'];
 
     // Get the summoner's level
     $summonerLevel = $data['summonerLevel'];
@@ -124,7 +159,7 @@ if ($response !== false) {
         echo "<h1>{$championMasteryScore}</h1>";
 
         //Inserting champion mastery to database
-        $sql = "UPDATE `summoners` SET `total_mastery`='$championMasteryScore' WHERE `name`='$summonerName'"; 
+        $sql = "UPDATE `summoners` SET `total_mastery`='$championMasteryScore' WHERE `name`='$normalizedName'"; 
 
 	    //die($sql);
         $result= mysqli_query($conn,$sql);
@@ -201,7 +236,8 @@ foreach ($data as $entry) {
 $stmt->close();
 // Close the connection
 $conn->close();
-$url = "http://localhost/mains/results.php?summonerName=". urldecode($summonerName);
+$cleanedName = str_replace('  ', ' ', $sName);
+$url = "http://localhost/mains/results.php?summonerName=". urlencode($cleanedName);
 header("Location: $url");
 exit();
 ?>
