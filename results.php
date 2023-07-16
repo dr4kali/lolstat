@@ -4,12 +4,40 @@
 <head>
   <title>Centered Card</title>
   <link rel="stylesheet" type="text/css" href="stylers.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
+<div class="cursor"></div>
+<script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;")
+})
+
+</script>
 <header>
-        <img src="logo.png" class="logo" alt="logo" width="300px"/>
-    </header><br/>
-<?php include 'dbconf.php';
+    <div class="header-container">
+      <div class="site-identity">
+        <img src="logo.png" alt="Logo" width="300px">
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="http://localhost/lolstat-main/wordpress/">Home</a></li>
+          <li><a href="http://localhost/lolstat-main/wordpress/newsletter/">Newsletter</a></li>
+          <li><a href="http://localhost/lolstat-main/wordpress/search/">Search</a></li>
+        </ul>
+      </nav>
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </header>
+
+<main>
+
+  <?php include 'dbconf.php';
           $summonerName = $_GET['summonerName'];
           $summonerName = urldecode($summonerName);
           $normalizedName = strtolower($summonerName);
@@ -289,6 +317,12 @@
         echo "<p class='mb-0'>$minMasteryChampionLevel</p>";
         ?></h3>
   </div>
-</div>
+  </div>
+
+</main>
+<?php
+$update = "http://localhost/mains/update_summoner.php?summonerName=". urlencode($summonerName);
+echo "<a class='my-button' href='$update'>Update</a>";
+?>
 </body>
 </html>
