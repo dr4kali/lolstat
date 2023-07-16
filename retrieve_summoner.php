@@ -14,7 +14,7 @@ $checkQuery = "SELECT name FROM summoners WHERE name = '$normalizedName'";
 $result = mysqli_query($conn, $checkQuery);
 
 //Riot Game API
-$API = "RGAPI-5641276c-236c-40ec-9767-b2e3a67bc6b5";
+$API = "RGAPI-e1731840-f62b-4fba-9afc-13fac8fce1f0";
 
 if (mysqli_num_rows($result) > 0) {
 
